@@ -1,7 +1,7 @@
 name: Builb Test and push
 on: [push]
 env:
-  IMAGE_NAME: student:latest
+  IMAGE_NAME: student
   REPO_NAME: anandanlk
 
 
