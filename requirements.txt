@@ -7,3 +7,5 @@ tinydb==4.8.0
 setuppy-generator==2020.12.2
 
 
+
+pymongo~=4.6.1
