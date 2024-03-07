@@ -8,7 +8,7 @@ services:
     environment:
       MONGO_URI: mongodb://mongo:27017
     ports:
-      - "8080:8080"
+      - "172.17.0.2:8080:8080"
 
   mongo:
     restart: unless-stopped
