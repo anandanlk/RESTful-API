@@ -30,7 +30,7 @@ jobs:
         collection: postman/collection.json
         environment: postman/environment.json
         reporters: cli
-        bail: true
+        iterationCount: 3
 
     - name: Output summary to console
       run: echo ${{ steps.run-newman.outputs.summary }}
