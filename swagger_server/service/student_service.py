@@ -29,7 +29,11 @@ def get_by_id(student_id=None, subject=None):
 
 
 def delete(student_id=None):
-    result = mongo_db.local.student.find_one_and_delete({"_id": ObjectId(student_id)})
+    try:
+        oid = ObjectId(student_id)
+    except (InvalidId, TypeError):
+        return 'not found', 404
+    result = mongo_db.local.student.find_one_and_delete({"_id": oid})
     if not result:
         return 'not found', 404
     return student_id
