@@ -10,7 +10,7 @@ def add(student=None):
     if mongo_db.local.student.find_one({"first_name": student.first_name, "last_name": student.last_name}):
         return 'already exists', 409
     result = mongo_db.local.student.insert_one(student.to_dict())
-    return result
+    return str(result.inserted_id), 200
 
 
 def get_by_id(student_id=None):
