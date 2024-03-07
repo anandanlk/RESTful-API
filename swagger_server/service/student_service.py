@@ -2,6 +2,7 @@ import os
 
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+from bson.errors import InvalidId
 
 # Connecting to Database
 mongo_db = MongoClient(os.getenv('MONGO_URI'))
@@ -15,7 +16,11 @@ def add(student=None):
 
 
 def get_by_id(student_id=None, subject=None):
-    student = mongo_db.local.student.find_one({"_id": ObjectId(student_id)})
+    try:
+        oid = ObjectId(student_id)
+    except (InvalidId, TypeError):
+        return 'not found', 404
+    student = mongo_db.local.student.find_one({"_id": oid})
     if not student:
         return 'not found', 404
     student['student_id'] = str(student['_id'])
