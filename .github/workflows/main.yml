@@ -25,13 +25,13 @@ jobs:
       run: |
         docker push $REPO_NAME/$IMAGE_NAME
 
-    - name: run docker
-      run: |
-        docker run -d -e 8080:8080 -host=172.17.0.2 $REPO_NAME/$IMAGE_NAME:latest && \
-          docker ps && sleep 5
-#    - name: run docker-compose
+#    - name: run docker
 #      run: |
-#        docker-compose up -d && docker ps && sleep 5
+#        docker run -d -e 8080:8080 -host=172.17.0.2 $REPO_NAME/$IMAGE_NAME:latest && \
+#          docker ps && sleep 5
+    - name: run docker-compose
+      run: |
+        docker-compose up -d && docker ps && sleep 5
 
 #    - name: "Check files existence"
 #      uses: andstor/file-existence-action@v2
