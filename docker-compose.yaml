@@ -1,6 +1,6 @@
 version: '3'
 services:
-  student:
+  student_service:
     image: anandanlk/student_service
     restart: unless-stopped
     depends_on:
