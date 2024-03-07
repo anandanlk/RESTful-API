@@ -31,7 +31,7 @@ def delete_student(student_id):  # noqa: E501
 
     :rtype: Student
     """
-    return delete(student_id)
+    return delete(str(student_id))
 
 
 def get_student_by_id(student_id):  # noqa: E501
@@ -44,4 +44,4 @@ def get_student_by_id(student_id):  # noqa: E501
 
     :rtype: Student
     """
-    return get_by_id(student_id)
+    return get_by_id(str(student_id))
