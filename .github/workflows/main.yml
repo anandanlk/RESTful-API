@@ -16,6 +16,13 @@ jobs:
     - name: run docker-compose
       run: |
         docker-compose up -d && docker ps && sleep 5
+
+    - name: "Check files existence"
+      uses: andstor/file-existence-action@v2
+      with:
+        files: "postman/collection.json,postman/environment.json"
+        fail: true
+
     - name: Run API Tests
       id: run-newman
       uses: anthonyvscode/newman-action@v1
@@ -23,7 +30,26 @@ jobs:
         collection: postman/collection.json
         environment: postman/environment.json
         reporters: cli
-        iterationCount: 3
+        bail: true
+
+    - name: Check if we failed
+      id: fail-check
+      shell: bash
+      env:
+        JSON_DOC: ${{ steps.run-newman.outputs.summary }}
+      run: |
+        printf '%s\n' "$JSON_DOC" > summary.json
+        cat summary.json
+        if grep -q Collection summary.json; then
+          echo "failed=false" >> $GITHUB_OUTPUT;
+        else
+          echo "failed=true" >> $GITHUB_OUTPUT;
+        fi
+
+    - name: fail if empty
+      if: ${{ steps.fail-check.outputs.failed == 'true' }}
+      run: exit 1
+
 
     - name: Output summary to console
       run: echo ${{ steps.run-newman.outputs.summary }}
