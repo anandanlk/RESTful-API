@@ -2,7 +2,7 @@ version: '3'
 services:
   student:
     container_name: student
-    image: student:latest
+    image: anandanlk/student_service:latest
     restart: unless-stopped
     depends_on:
       - mongo
