@@ -26,8 +26,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: number
-          format: integer
+          type: string
       responses:
         "200":
           description: successful operation
@@ -52,8 +51,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: number
-          format: integer
+          type: string
       responses:
         "200":
           description: Successfully deleted the user.
@@ -62,7 +60,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Student'
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request. User ID must be a string.
         "404":
           description: A user with the specified ID was not found.
       x-openapi-router-controller: swagger_server.controllers.default_controller
@@ -83,8 +81,7 @@ paths:
           content:
             application/json:
               schema:
-                type: number
-                format: integer
+                type: string
                 x-content-type: application/json
         "400":
           description: "invalid input, object invalid"
@@ -100,7 +97,7 @@ components:
       type: object
       properties:
         student_id:
-          type: integer
+          type: string
         first_name:
           type: string
         last_name:
@@ -110,7 +107,7 @@ components:
           items:
             $ref: '#/components/schemas/GradeRecord'
       example:
-        student_id: 0
+        student_id: id
         last_name: last_name
         first_name: first_name
         gradeRecords:
