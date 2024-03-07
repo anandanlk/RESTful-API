@@ -15,9 +15,10 @@ def add(student=None):
 
 def get_by_id(student_id=None):
     student = mongo_db.local.student.find_one({"student_id": student_id})
-    del student["_id"]
     if not student:
         return 'not found', 404
+    student['student_id'] = str(student['_id'])
+    del student["_id"]
     return student
 
 
