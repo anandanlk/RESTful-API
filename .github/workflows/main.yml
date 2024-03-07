@@ -46,7 +46,7 @@ jobs:
         collection: postman/collection.json
         environment: postman/environment.json
         reporters: cli
-        iteration: 3
+        iterationCount: 3
 
 #    - name: Check if we failed
 #      id: fail-check
