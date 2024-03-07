@@ -1,6 +1,7 @@
 import os
 
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 
 # Connecting to Database
 mongo_db = MongoClient(os.getenv('MONGO_URI'))
@@ -17,7 +18,7 @@ def get_by_id(student_id=None):
     student = mongo_db.local.student.find_one({"student_id": student_id})
     if not student:
         return 'not found', 404
-    student['student_id'] = str(student['_id'])
+    # student['student_id'] = student_id
     del student["_id"]
     return student
 
